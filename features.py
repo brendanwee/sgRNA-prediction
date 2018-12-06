@@ -3,7 +3,7 @@ from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna, generic_rna
 from Bio.SeqUtils import MeltingTemp as mt
 from io_med import import_formatted_data
-from reformat_data import split_x_y
+from reformat_data import split_x_y, format_target_guide
 from sklearn.linear_model import Lasso, SGDRegressor
 from sklearn.metrics import mean_squared_error
 from numpy import mean, var, argmin
@@ -101,7 +101,7 @@ def make_features(data):
     transformed_data = np.zeros((len(data), 885))
     data = format_target_guide(data)
 
-    for row_i  in range(0,len(data)):
+    for row_i in range(0,len(data)):
         entry, y = data[row_i][:-1], data[row_i][-1]
 
         # unpack
@@ -148,7 +148,9 @@ def make_features(data):
             pass
 
         # num_mismatch
-        assert len(seq[:-3]) == len(guide)
+        if len(seq[:-3]) != len(guide):
+            if seq == "":
+                continue
         transformed_data[row_i, 829] = hamming(seq[:-3], guide) # 830
 
         # one hot encoding of mismatches in guide - 20 -> 850
@@ -174,6 +176,51 @@ def make_features(data):
     return transformed_data
 
 
+"""def select_features_and_model(train_x, train_y, val_x, val_y):
+    # TODO: build a list of feature selectors from scikit learn
+    feature_selectors = []
+    # TODO: for each feature selector, define a list of hyperparams e.x alphas = [0,0.000001,0.00001,...]
+    hyperparams = [
+        [hyperparams for selector 1]
+        [hyperparams for selector 2]
+        [hyperparams for selector 3]
+        ...
+    ]
+    results = []
+    # TODO: define a list of regressors from sci-kit learn
+    regressors = []
+
+    for selector, hyperparameters in zip(feature_selectors, hyperparams): # iterates across both at same time
+        MSE_alphas = []
+        for a in hyperparams:
+
+            model = selector(alpha=a, maxiterations= large number)
+            params = model.coef_
+            features = [i for i, x in enumerate(params) if x != 0]
+
+            selected_train_x = train_x[:, features]
+            selected_val_x = val_x[:, features]
+            MSEs = []
+
+            for regressor in regressors:
+                model = regressor()
+                model.fit(selected_train_x, train_y)
+
+                predictions = model.predict(selected_val_x)
+                error = mean_squared_error(val_y, predictions)
+                MSEs.append(error)
+            MSE_alphas.append(MSEs)
+        results.append(MSE_alphas)
+
+    best = (i, 0, j, 99999) # selector index, alpha index, regressor index, error
+    for selector_i, MSE_alpha in enumerate(results):
+        for alpha_i, MSE in enumerate(MSE_alpha):
+            for regressor_i, error in enumerate(MSE):
+                if error < best[3]:
+                    best = (selector_i, alpha_i, regressor_i, error)
+                    """
+
+
 def select_and_plot_features(train_file, val_file, test_file):
     # train
     data = import_formatted_data(train_file)
@@ -184,6 +231,9 @@ def select_and_plot_features(train_file, val_file, test_file):
     nums = []
     train_mse = []
     val_mse = []
+
+    # TODO: build list of feature selectors from scikit learn. Ex. SVM, ReliefF
+
     for a in alphas:
         mod = Lasso(alpha=a, max_iter=10000)
         mod.fit(transformed_X, y)

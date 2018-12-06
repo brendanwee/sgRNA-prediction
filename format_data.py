@@ -14,13 +14,9 @@ if __name__=="__main__":
     target_i, guide_i, label_i = int(target_i), int(guide_i), int(label_i)
 
     data = import_data(filename, target_i, guide_i, label_i) # Target, guide, label
-    print max([len(x[0]) for x in data])
-    exit()
-
-
 
     mix_data = shuffle_data(data)
-    print len(data)
+
     feature_data = make_features(mix_data)
 
     train, val, test = split_train_val_test(feature_data)
