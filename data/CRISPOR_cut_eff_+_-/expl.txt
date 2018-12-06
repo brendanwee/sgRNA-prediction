@@ -1,0 +1,4 @@
+This data was taken from the original data directory in the CRISPOR paper github repo.
+
+sgRNA from various studies with their cutting efficiency in the 3rd column
+name	seq	score	type
