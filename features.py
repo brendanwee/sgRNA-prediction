@@ -99,6 +99,7 @@ def make_features_cut_eff(x_data):
 
 def make_features(data):
     transformed_data = np.zeros((len(data), 885))
+    data = format_target_guide(data)
 
     for row_i  in range(0,len(data)):
         entry, y = data[row_i][:-1], data[row_i][-1]

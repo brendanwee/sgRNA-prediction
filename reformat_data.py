@@ -20,6 +20,13 @@ def reformat_data(filename):
     return new_data #
 
 
+def format_target_guide(data):
+    new_data = []
+    for row in data:
+        if 
+
+
+
 def shuffle_data(data):
     shuffled_data = []
     while data:
