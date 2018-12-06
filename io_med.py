@@ -1,3 +1,6 @@
+from dicts import INT_TO_BASE
+from random import randint
+
 def import_raw_data_cutt_eff(filename):
     data = []
     with open(filename, "r") as f:
@@ -12,6 +15,26 @@ def import_raw_data_cutt_eff(filename):
                 row[3] = 0
             data.append(row)
             line = f.readline().strip()
+    return data
+
+
+def import_azimuth_data(filename, target_i, guide_i, label_i):
+    data = []
+    with open(filename, "r") as f:
+        for line in f:
+            row = line.strip().split("\t")
+            try:
+                float(row[label_i]) # header?
+            except ValueError:
+                continue
+            target = row[target_i]
+            if row[-1] == "PAM":
+                target = target + row[3]
+            else:
+                N = INT_TO_BASE[randint(0,3)]
+                target = target + N + "GG"
+            new_row = [target, row[guide_i], float(row[label_i])]
+            data.append(new_row)
     return data
 
 

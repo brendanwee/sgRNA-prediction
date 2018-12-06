@@ -2,7 +2,6 @@ from io_med import import_raw_data_cutt_eff, write_data, import_formatted_data
 from random import randint
 from Bio import Align
 from copy import deepcopy
-
 #name	seq	score	type
 
 def reformat_data(filename):
@@ -33,16 +32,15 @@ def flanking_pam(data):
 
 def find_guide_alignment(target, guide):
     aligner = Align.PairwiseAligner()
-    aligner.query_internal_open_gap_score = -5
-    aligner.target_internal_open_gap_score = -5
+    aligner.query_internal_open_gap_score = -3
+    aligner.target_internal_open_gap_score = -3
     aligner.target_left_open_gap_score = 0
     aligner.target_right_open_gap_score = 0
     aligner.query_left_open_gap_score = 0
     aligner.query_right_open_gap_score = 0
+    aligner.match = 2
 
     alignments = aligner.align(target, guide)
-
-    assert len(alignments) == 1
 
     alignment = str(alignments[0])
     start = 0
@@ -65,7 +63,9 @@ def format_target_guide(data):
             new_row[1] = row[1][:-3]
         if flanking:
             start, end = find_guide_alignment(row[0], row[1]) # starting match, and last match index
-            if end == -3:
+            if end >-3:
+                continue
+            elif end == -3:
                 new_row[0] = row[0][start:]
             else:
                 new_row[0] = row[0][start:end + 3]

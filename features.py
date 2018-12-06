@@ -8,9 +8,7 @@ from sklearn.linear_model import Lasso, SGDRegressor
 from sklearn.metrics import mean_squared_error
 from numpy import mean, var, argmin
 from plotting import plot_lines
-
-
-BASE_MAP = {"A":0, "C":1, "T":2, "G":3}
+from dicts import BASE_MAP
 
 
 def seq_to_int(seq):
@@ -155,6 +153,12 @@ def make_features(data):
 
         # one hot encoding of mismatches in guide - 20 -> 850
         for i in range(0, len(guide)):
+            if i == len(seq):
+                print "here?"
+                print data[row_i]
+                print seq
+                print guide
+                exit()
             if guide[i] != seq[i]:
                 transformed_data[row_i, 830+i] = 1
 
