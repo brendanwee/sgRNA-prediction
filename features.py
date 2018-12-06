@@ -9,6 +9,7 @@ from sklearn.metrics import mean_squared_error
 from numpy import mean, var, argmin
 from plotting import plot_lines
 from dicts import BASE_MAP
+from joblib import dump, load
 
 
 def seq_to_int(seq):
@@ -180,7 +181,7 @@ def make_features(data):
     return transformed_data
 
 
-"""def select_features_and_model(train_x, train_y, val_x, val_y):
+def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
     # TODO: build a list of feature selectors from scikit learn
     feature_selectors = []
     # TODO: for each feature selector, define a list of hyperparams e.x alphas = [0,0.000001,0.00001,...]
@@ -196,7 +197,7 @@ def make_features(data):
 
     for selector, hyperparameters in zip(feature_selectors, hyperparams): # iterates across both at same time
         MSE_alphas = []
-        for a in hyperparams:
+        for a in hyperparameters:
 
             model = selector(alpha=a, maxiterations= large number)
             params = model.coef_
@@ -204,7 +205,7 @@ def make_features(data):
 
             selected_train_x = train_x[:, features]
             selected_val_x = val_x[:, features]
-            MSEs = []
+            MSEs_regressors = []
 
             for regressor in regressors:
                 model = regressor()
@@ -212,17 +213,33 @@ def make_features(data):
 
                 predictions = model.predict(selected_val_x)
                 error = mean_squared_error(val_y, predictions)
-                MSEs.append(error)
-            MSE_alphas.append(MSEs)
+                MSEs_regressors.append((error,model,features))
+            MSE_alphas.append(MSEs_regressors)
         results.append(MSE_alphas)
 
-    best = (i, 0, j, 99999) # selector index, alpha index, regressor index, error
+    best = (i, 0, model, 99999) # selector index, alpha index, regressor index, error
     for selector_i, MSE_alpha in enumerate(results):
-        for alpha_i, MSE in enumerate(MSE_alpha):
-            for regressor_i, error in enumerate(MSE):
+        for alpha_i, MSE_regressor in enumerate(MSE_alpha):
+            for error, model,features in MSE_regressor:
                 if error < best[3]:
-                    best = (selector_i, alpha_i, regressor_i, error)
-                    """
+                    best = (selector_i, alpha_i, model, error, features)
+
+    featureselector = feature_selectors[best[0]]
+    alpha = hyperparams[best[0]][best[1]]
+    model = best[2]
+    error = best[3]
+    features = best[4]
+
+
+    dump(model, dataset_name+".joblib")
+
+    with open(dataset_name+"_features.txt", "w") as f:
+        feats = [str(x) for x in features]
+        f.write("\t".join(feats))
+    
+
+    # TODO: write text file describing featureselector and alpha and error achieved by this model
+
 
 
 def select_and_plot_features(train_file, val_file, test_file):
