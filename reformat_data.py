@@ -1,10 +1,10 @@
-from io_med import import_raw_data, write_data, import_formatted_data
+from io_med import import_raw_data_cutt_eff, write_data, import_formatted_data
 from random import randint
 
 #name	seq	score	type
 
 def reformat_data(filename):
-    data = import_raw_data(filename)
+    data = import_raw_data_cutt_eff(filename)
     new_data = []
 
     i = 0
@@ -17,20 +17,25 @@ def reformat_data(filename):
             cut_percent = data[i][2]
             new_data.append([site_seq, guide_seq, cut_percent])
             i += 1
-    return new_data
+    return new_data #
 
 
 def shuffle_data(data):
     shuffled_data = []
     while data:
         i = randint(0,len(data)-1)
-        shuffled_data.append(data[i])
-        del data[i]
+        shuffled_data.append(data.pop(i))
     return shuffled_data
 
 
 def split_data(data, n):
     return data[:n], data[n:]
+
+
+def split_train_val_test(data):
+    num_train = data*3/4
+    num_val = data/8
+    return data[:num_train],data[num_train, num_train+num_val], data[num_train+num_val:]
 
 
 def split_x_y(data):

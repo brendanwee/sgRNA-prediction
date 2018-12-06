@@ -1,4 +1,4 @@
-def import_raw_data(filename):
+def import_raw_data_cutt_eff(filename):
     data = []
     with open(filename, "r") as f:
         line = f.readline().strip()
@@ -14,6 +14,22 @@ def import_raw_data(filename):
             line = f.readline().strip()
     return data
 
+
+def import_data(filename, target_i, guide_i, label_i):
+    data = []
+    with open(filename, "r") as f:
+        for line in f:
+            row = line.strip().split("\t")
+            try:
+                float(row[label_i]) # header?
+            except ValueError:
+                continue
+
+            new_row = [row[target_i], row[guide_i], float(row[label_i])]
+            data.append(new_row)
+    return data
+
+
 def import_formatted_data(filename):
     data = []
     with open(filename, "r") as f:
@@ -27,6 +43,7 @@ def import_formatted_data(filename):
             data.append(row)
             line = f.readline().strip()
     return data
+
 
 def write_data(data, filename):
     with open(filename, "w") as f:

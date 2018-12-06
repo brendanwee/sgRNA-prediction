@@ -23,9 +23,7 @@ def seq_to_int(seq):
 def hamming(x1,x2):
     return sum([a!=b for a,b in zip(x1,x2)])
 
-
-
-def make_features(x_data):
+def make_features_cut_eff(x_data):
     transformed_data = np.zeros((len(x_data), 884))
 
     for row_i  in range(0,len(x_data)):
@@ -99,6 +97,81 @@ def make_features(x_data):
 
     return transformed_data
 
+def make_features(data):
+    transformed_data = np.zeros((len(data), 885))
+
+    for row_i  in range(0,len(data)):
+        entry, y = data[row_i][:-1], data[row_i][-1]
+
+        # unpack
+        seq = entry[0]
+        guide = entry[1]
+
+        # hot one encoding for seq - 23 *4 = 92
+        for i in range(0, len(seq)):
+            base = seq[i]
+            if base == "-":
+                i += 1
+                continue
+            transformed_data[row_i, 4*i+BASE_MAP[base]] = 1
+            i += 1
+
+        # one hot encoding for 2mer seq - 22 * 16 = 352; 352 + 92 = 444
+        for i in range(0, len(seq) - 1):
+            s = seq[i:i+2]
+            if "-" in seq:
+              continue
+            seq_i = seq_to_int(s)
+            transformed_data[row_i, 16*i+seq_i + 92] = 1
+
+        # one hot encoding for guide - 20 * 4 = 80; 80 + 444 = 524
+        for i in range(0, len(guide)):
+            transformed_data[row_i, 444 + 4*i+BASE_MAP[guide[i]]] = 1
+
+
+        # one hot encoding for 2mer guide - 19 * 16 = 304; 304 + 524 = 828
+        for i in range(0, len(guide) - 1):
+            guide_i = seq_to_int(guide[i:i+2])
+            transformed_data[row_i, 16*i+guide_i + 524] = 1
+
+        # melting temp
+        rna_seq = Seq(guide[10:], generic_dna).transcribe()
+        complement_DNA = Seq(seq[10:-3], generic_dna).complement()
+
+
+        # NN Thermodynamics for 3' end
+        try:
+            transformed_data[row_i, 829] = mt.Tm_NN(rna_seq, c_seq=complement_DNA,
+                nn_table=mt.R_DNA_NN1, de_table=mt.DNA_DE1)
+        except ValueError:
+            pass
+
+        # num_mismatch
+        assert len(seq[:-3]) == len(guide)
+        transformed_data[row_i, 829] = hamming(seq[:-3], guide) # 830
+
+        # one hot encoding of mismatches in guide - 20 -> 850
+        for i in range(0, len(guide)):
+            if guide[i] != seq[i]:
+                transformed_data[row_i, 830+i] = 1
+
+        # PAM dinucleotides = 32
+        index = seq_to_int(seq[-3:-1])
+        transformed_data[row_i, index + 850] = 1
+        index = seq_to_int(seq[-2:])
+        transformed_data[row_i, index + 866] = 1
+
+
+        GC = sum([1 for x in guide if x in ("G","C")])
+        AT = sum([1 for x in guide if x in ("A","T")])
+        if GC - AT > 10:
+            transformed_data[row_i, 882] = 1 # GC high
+        elif AT - GC > 10:
+            transformed_data[row_i, 883] = 1 # GC Low
+        transformed_data[row_i, 884] = y
+
+    return transformed_data
+
 
 def select_and_plot_features(train_file, val_file, test_file):
     # train
@@ -143,4 +216,4 @@ def select_and_plot_features(train_file, val_file, test_file):
     print argmin(val_mse)
     #plot_lines(nums, "num_features", "Features_vs_MSE", train_mse, "Training_MSE", val_mse, "Val_MSE")
 
-select_and_plot_features("train.tab", "val.tab", "small_test.tab")
+#select_and_plot_features("train.tab", "val.tab", "small_test.tab")
