@@ -2,6 +2,7 @@ from io_med import import_raw_data_cutt_eff, write_data, import_formatted_data
 from random import randint
 from Bio import Align
 from copy import deepcopy
+import numpy as np
 #name	seq	score	type
 
 def reformat_data(filename):
@@ -98,7 +99,7 @@ def split_x_y(data):
     for row in data:
         X.append(row[:-1])
         y.append(row[-1])
-    return X, y
+    return np.array(X), np.array(y)
 
 """
 data = import_formatted_data("test.tab")

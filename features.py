@@ -15,7 +15,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE
 from sklearn.linear_model import Lasso
 from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import LinearSVR, SVR
 
 
@@ -192,26 +192,18 @@ def make_features(data):
 
 def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
     # TODO: build a list of feature selectors from scikit learn
+
     feature_selectors = [RFE(SVR(kernel="linear"), n_features_to_select=20),
-                         SelectFromModel(LinearSVR(C=0.01), threshold=-np.inf, max_features=20)]
+                         SelectFromModel(LinearSVR(C=0.01),max_features=20),
+                         DecisionTreeClassifier()]
 
 
-    selector1 = feature_selectors[0]
+    selector1 = feature_selectors[1]
     selector1.fit(train_x, train_y)
     print selector1.get_support(indices=True)
     exit()
 
 
-
-
-
-    # TODO: for each feature selector, define a list of hyperparams e.x alphas = [0,0.000001,0.00001,...]
-    """hyperparams = [
-        [hyperparams for selector 1]
-        [hyperparams for selector 2]
-        [hyperparams for selector 3]
-        ...
-    ]"""
     results = []
     # TODO: define a list of regressors from sci-kit learn
     regressors = []
