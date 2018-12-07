@@ -1,25 +1,22 @@
 import numpy as np
 from Bio.Seq import Seq
-from Bio.Alphabet import generic_dna, generic_rna
+from Bio.Alphabet import generic_dna
 from Bio.SeqUtils import MeltingTemp as mt
 from io_med import import_formatted_data
 from reformat_data import split_x_y, format_target_guide
+
+from numpy import argmin
+from dicts import BASE_MAP
+from joblib import dump
+from sklearn.feature_selection import SelectFromModel, RFE
+from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor
 from sklearn.linear_model import Lasso, SGDRegressor
 from sklearn.metrics import mean_squared_error
-from numpy import mean, var, argmin
-from plotting import plot_lines
-from dicts import BASE_MAP
-from joblib import dump, load
-from sklearn import preprocessing
-from sklearn.naive_bayes import GaussianNB
-from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE
-from sklearn.linear_model import Lasso
-from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import LinearSVR, SVR
+from sklearn.gaussian_process import GaussianProcessRegressor
+from copy import deepcopy
 
-
-from skfeature.function.similarity_based import reliefF
 
 def seq_to_int(seq):
     num = 0
@@ -191,89 +188,111 @@ def make_features(data):
 
 
 def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
-    # TODO: build a list of feature selectors from scikit learn
 
-    feature_selectors = [RFE(SVR(kernel='linear'), n_features_to_select=1),
-                         RFE(SVR(kernel='linear'), n_features_to_select=20),
-                         RFE(SVR(kernel='linear'), n_features_to_select=100),
-
-                         SelectFromModel(LinearSVR(C=0.01),max_features=1),
-                         SelectFromModel(LinearSVR(C=0.01), max_features=20),
-                         SelectFromModel(LinearSVR(C=0.01), max_features=100),
-
-                         SelectFromModel(DecisionTreeRegressor(), max_features=1),
-                         SelectFromModel(DecisionTreeRegressor(), max_features=20),
+    feature_selectors = [
+                         SelectFromModel(DecisionTreeRegressor(), max_features=50),
+                         SelectFromModel(DecisionTreeRegressor(), max_features=75),
                          SelectFromModel(DecisionTreeRegressor(), max_features=100),
 
-                         SelectFromModel(ExtraTreesRegressor(),max_features=1),
-                         SelectFromModel(ExtraTreesRegressor(), max_features=20),
+                         SelectFromModel(ExtraTreesRegressor(),max_features=50),
+                         SelectFromModel(ExtraTreesRegressor(), max_features=75),
                          SelectFromModel(ExtraTreesRegressor(), max_features=100),
 
-                         SelectFromModel(RandomForestRegressor(), max_features=1),
-                         SelectFromModel(RandomForestRegressor(), max_features=20),
+                         SelectFromModel(RandomForestRegressor(), max_features=50),
+                         SelectFromModel(RandomForestRegressor(), max_features=75),
                          SelectFromModel(RandomForestRegressor(), max_features=100)]
 
-
-    selector1 = feature_selectors[0]
-    selector1.fit(train_x, train_y)
-    print selector1.get_support(indices=True)
-    exit()
-
-
     results = []
-    # TODO: define a list of regressors from sci-kit learn
-    regressors = []
 
-    gnb = GaussianNB()
-    y_pred = gnb.fit(new_data, Y).predict(new_data)
+    regressors = [ExtraTreesRegressor(),
+                  RandomForestRegressor(),
+                  AdaBoostRegressor(),
+                  GradientBoostingRegressor(),
+                  GradientBoostingRegressor(loss='lad'),
+                  GradientBoostingRegressor(loss='huber'),
+                  SVR(max_iter=5000),
 
-    for selector, hyperparameters in zip(feature_selectors, hyperparams): # iterates across both at same time
-        MSE_alphas = []
-        for a in hyperparameters:
 
-            model = selector(alpha=a).fit(train_x)
+                  ]
 
-            params = model.get_support()
-            features = [i for i, x in enumerate(params) if x != 0]
+    # SGDRegressor(max_iter=5000, penalty="l1"),
+    #GaussianProcessRegressor()
 
-            selected_train_x = train_x[:, features]
-            selected_val_x = val_x[:, features]
-            MSEs_regressors = []
+    feature_selector_strings = [
 
-            for regressor in regressors:
-                model = regressor()
-                model.fit(selected_train_x, train_y)
+                                "SelectFromModel(DecisionTreeRegressor(), max_features=50)",
+                                "SelectFromModel(DecisionTreeRegressor(), max_features=75)",
+                                "SelectFromModel(DecisionTreeRegressor(), max_features=100)",
 
-                predictions = model.predict(selected_val_x)
-                error = mean_squared_error(val_y, predictions)
-                MSEs_regressors.append((error,model,features))
-            MSE_alphas.append(MSEs_regressors)
-        results.append(MSE_alphas)
+                                "SelectFromModel(ExtraTreesRegressor(), max_features=50)",
+                                "SelectFromModel(ExtraTreesRegressor(), max_features=75)",
+                                "SelectFromModel(ExtraTreesRegressor(), max_features=100)",
 
-    best = (i, 0, model, 99999) # selector index, alpha index, regressor index, error
-    for selector_i, MSE_alpha in enumerate(results):
-        for alpha_i, MSE_regressor in enumerate(MSE_alpha):
-            for error, model,features in MSE_regressor:
+                                "SelectFromModel(RandomForestRegressor(), max_features=50)",
+                                "SelectFromModel(RandomForestRegressor(), max_features=75)",
+                                "SelectFromModel(RandomForestRegressor(), max_features=100)"]
+
+    regressor_strings = ["ExtraTreesRegressor()",
+                         "RandomForestRegressor()",
+                         "AdaBoostRegressor()",
+                         "GradientBoostingRegressor()",
+                         "GradientBoostingRegressor(loss='lad')",
+                         "GradientBoostingRegressor(loss='huber')",
+                         "SVR()",
+
+                         ]
+    "SGDRegressor(max_iter=5000, penalty='l1')"
+    "GaussianProcessRegressor()"
+
+    for selector, selector_s in zip(feature_selectors, feature_selector_strings):  # iterates across both at same time
+        print "selecting with ", selector_s
+        selector.fit(train_x, train_y)
+        features = selector.get_support(indices=True)
+
+        selected_train_x = train_x[:, features]
+        selected_val_x = val_x[:, features]
+        errors = []
+
+        for model, model_s in zip(regressors, regressor_strings):
+            print "predicting with ", model_s
+            model.fit(selected_train_x, train_y)
+
+            predictions = model.predict(selected_val_x)
+
+            error = mean_squared_error(val_y, predictions)
+            errors.append((error, deepcopy(model), features))
+        results.append(errors)
+    with open("log.txt", "w") as f:
+        best = (0, 0, model, 99999, [])  # selector index, regressor index, model, error, features
+        for selector_i, errors in enumerate(results):
+            for regressor_i, model_stats in enumerate(errors):
+                error = model_stats[0]
+                model = model_stats[1]
+                features = model_stats[2]
+
+                selector_str = feature_selector_strings[selector_i]
+                regressor_str = regressor_strings[regressor_i]
+
+                f.write("validation error for  " + selector_str + "  feature selector and  " + regressor_str + "  is  " + str(error))
+
                 if error < best[3]:
-                    best = (selector_i, alpha_i, model, error, features)
+                    best = (selector_i, regressor_i, model, error, features)
 
-    featureselector = feature_selectors[best[0]]
-    alpha = hyperparams[best[0]][best[1]]
-    model = best[2]
+    featureselector_str = feature_selector_strings[best[0]]
+    model_str = regressor_strings[best[1]]
+    b_model = best[2]
     error = best[3]
-    features = best[4]
+    feats = best[4]
 
-
-    dump(model, dataset_name+".joblib")
+    dump(b_model, dataset_name+".joblib")
 
     with open(dataset_name+"_features.txt", "w") as f:
-        feats = [str(x) for x in features]
+        feats = [str(x) for x in feats]
         f.write("\t".join(feats))
 
-
-    # TODO: write text file describing featureselector and alpha and error achieved by this model
-
-
+    with open(dataset_name + "_performance.txt", "w") as f:
+        f.write("validation error for " + featureselector_str + " feature selector and " + model_str + " is " + str(error))
+    return b_model, feats
 
 
 def select_and_plot_features(train_file, val_file, test_file):

@@ -1,0 +1,1 @@
+validation error for SelectFromModel(LinearSVR(C=0.01), max_features=50) feature selector and SGDRegressor(max_iter=5000, penalty='l1') is 0.19657891693378873

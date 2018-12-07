@@ -1,0 +1,150 @@
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  ExtraTreesRegressor()  is  0.0026762216116249034
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  RandomForestRegressor()  is  0.0024290947431864036
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  AdaBoostRegressor()  is  0.004753532771069653
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  GradientBoostingRegressor()  is  0.0021125077338920266
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.002177323471260565
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0019273866968186086
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  SVR()  is  0.005748779059905808
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0023278422622263688
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  GaussianProcessRegressor()  is  0.00273954916621459
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=50)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0045958397916868576
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  ExtraTreesRegressor()  is  0.0029286765984686196
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  RandomForestRegressor()  is  0.002469191438466843
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  AdaBoostRegressor()  is  0.002861541620520235
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  GradientBoostingRegressor()  is  0.0023516150880624888
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020415676039906355
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.002072628576259422
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  SVR()  is  0.005832319984497824
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.002406044338088745
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  GaussianProcessRegressor()  is  0.002424026413586706
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=75)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.008367566793497204
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  ExtraTreesRegressor()  is  0.003024791156145324
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  RandomForestRegressor()  is  0.0025329869984693086
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  AdaBoostRegressor()  is  0.0037575690321019787
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  GradientBoostingRegressor()  is  0.0024493350755243376
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020379986423226686
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0019983427910863945
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  SVR()  is  0.006358617621588601
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0025025627310635767
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  GaussianProcessRegressor()  is  0.0024026028117179344
+validation error for  RFE(SVR(kernel='linear'), n_features_to_select=100)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.007875598889647914
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  ExtraTreesRegressor()  is  0.0015323242717833966
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  RandomForestRegressor()  is  0.0011180196631095664
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  AdaBoostRegressor()  is  0.001651678555032691
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  GradientBoostingRegressor()  is  0.0016851073417515365
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.001994252682577568
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021011475548747497
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  SVR()  is  0.004981498836052348
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.002141703206850661
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  GaussianProcessRegressor()  is  0.001843399652435018
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=50)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.003565309583692995
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  ExtraTreesRegressor()  is  0.0022853935371390313
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  RandomForestRegressor()  is  0.0018019545267444611
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  AdaBoostRegressor()  is  0.0023160624932941297
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  GradientBoostingRegressor()  is  0.0025955639553093242
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020539323909135937
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0022108820699766724
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  SVR()  is  0.005349956297693593
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0024606592624768515
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  GaussianProcessRegressor()  is  0.00211064325544611
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=75)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0040357164419627944
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  ExtraTreesRegressor()  is  0.0015752780113611532
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  RandomForestRegressor()  is  0.0012893563697358632
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  AdaBoostRegressor()  is  0.0015279445682746609
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  GradientBoostingRegressor()  is  0.0015533472767101974
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0019965839462675714
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021334044212661385
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  SVR()  is  0.006133360951317684
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0022290589833736858
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  GaussianProcessRegressor()  is  0.002121983176908319
+validation error for  SelectFromModel(LinearSVR(C=0.01), max_features=100)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.004081497754132337
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  ExtraTreesRegressor()  is  0.002343873408286583
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  RandomForestRegressor()  is  0.0021536755854516124
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  AdaBoostRegressor()  is  0.0016217308255264988
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor()  is  0.002282170085533197
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.002054415496528038
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021147914628234614
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  SVR()  is  0.0052043881290318485
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0021088060652787156
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  GaussianProcessRegressor()  is  0.002235378764780883
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=50)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.00419861346618182
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  ExtraTreesRegressor()  is  0.0021860815423818225
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  RandomForestRegressor()  is  0.0021616411023975086
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  AdaBoostRegressor()  is  0.0017743897896601026
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor()  is  0.00214673369235015
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020367776548885345
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021078724776640995
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  SVR()  is  0.0047665526182512725
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0021833085498375337
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  GaussianProcessRegressor()  is  0.0024803287502365985
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=75)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.003063596330512596
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  ExtraTreesRegressor()  is  0.0032551476711793876
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  RandomForestRegressor()  is  0.0024991964831386085
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  AdaBoostRegressor()  is  0.0014351746412333969
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor()  is  0.002089412469203908
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0019840525006911275
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.002060886623736971
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  SVR()  is  0.0045602356187498935
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0017168176614342622
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  GaussianProcessRegressor()  is  0.002379841516103461
+validation error for  SelectFromModel(DecisionTreeRegressor(), max_features=100)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0035463311886599195
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  ExtraTreesRegressor()  is  0.0022287229225878124
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  RandomForestRegressor()  is  0.0020319190567605655
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  AdaBoostRegressor()  is  0.0018703002588713
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor()  is  0.0021381794331788123
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.001946917899471509
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021442860976671496
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  SVR()  is  0.004906461588752123
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0020558293935527237
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  GaussianProcessRegressor()  is  0.0021425882366504475
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=50)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0029513056971852366
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  ExtraTreesRegressor()  is  0.0028168256685024234
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  RandomForestRegressor()  is  0.0023256602423619797
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  AdaBoostRegressor()  is  0.005344682347448277
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor()  is  0.002205217734236253
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.002111658006140918
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0023241550339547137
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  SVR()  is  0.005186637348938515
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.002049098037971617
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  GaussianProcessRegressor()  is  0.001938993896605878
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=75)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0053846544847574
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  ExtraTreesRegressor()  is  0.0026704320447340675
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  RandomForestRegressor()  is  0.0021515584276239836
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  AdaBoostRegressor()  is  0.002013729597361136
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor()  is  0.0021698663489940276
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0018144409793727522
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.002787139994744731
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  SVR()  is  0.005566438075599768
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.001960110878194174
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  GaussianProcessRegressor()  is  0.0017715457399914154
+validation error for  SelectFromModel(ExtraTreesRegressor(), max_features=100)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.00528346775218136
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  ExtraTreesRegressor()  is  0.0025303046635054716
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  RandomForestRegressor()  is  0.002529884459537566
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  AdaBoostRegressor()  is  0.0022678638197884816
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor()  is  0.0022979254482722025
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020070227420959873
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.0021962665811225608
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  SVR()  is  0.00417990306691895
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.002007756825322676
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  GaussianProcessRegressor()  is  0.002224486284548093
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=50)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.0036052101212359117
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  ExtraTreesRegressor()  is  0.002640408663175139
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  RandomForestRegressor()  is  0.002246609933800436
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  AdaBoostRegressor()  is  0.002229447930421727
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor()  is  0.0023726125170656707
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.002047500811750434
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.002303718194506905
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  SVR()  is  0.004464930099114187
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0021376222625668446
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  GaussianProcessRegressor()  is  0.002352272582051715
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=75)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.005181854559299371
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  ExtraTreesRegressor()  is  0.0022656390234307537
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  RandomForestRegressor()  is  0.002354792197052822
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  AdaBoostRegressor()  is  0.001829236933152296
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor()  is  0.0022005592121111246
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='lad')  is  0.0020164763804405876
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  GradientBoostingRegressor(loss='huber')  is  0.002096365761277434
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  SVR()  is  0.004582849586463884
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  SGDRegressor(max_iter=5000, penalty='l1')  is  0.0020141222821286127
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  GaussianProcessRegressor()  is  0.002256405639393413
+validation error for  SelectFromModel(RandomForestRegressor(), max_features=100)  feature selector and  MLPRegressor(learning_rate='adaptive')  is  0.008148111731235794

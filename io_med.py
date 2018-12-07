@@ -84,3 +84,16 @@ def write_data(data, filename):
         for row in data:
             row = [str(x) for x in row]
             f.write("\t".join(row) + "\n")
+
+
+def import_train_val_test_data(dirname):
+    trainfile = "data/" + dirname + "/train.tab"
+    valfile = "data/" + dirname + "/val.tab"
+    testfile = "data/" + dirname + "/test.tab"
+
+    train_data = import_feature_data(trainfile)
+    val_data = import_feature_data(valfile)
+    test_data = import_feature_data(testfile)
+
+    return train_data, val_data, test_data
+
