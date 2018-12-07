@@ -1,5 +1,6 @@
 from dicts import INT_TO_BASE
 from random import randint
+import numpy as np
 
 def import_raw_data_cutt_eff(filename):
     data = []
@@ -75,7 +76,7 @@ def import_feature_data(filename):
             row = line.strip().split("\t")
             row = [float(x) for x in row]
             data.append(row)
-    return data
+    return np.array(data)
 
 
 def write_data(data, filename):
