@@ -10,7 +10,16 @@ from numpy import mean, var, argmin
 from plotting import plot_lines
 from dicts import BASE_MAP
 from joblib import dump, load
+from sklearn import preprocessing
+from sklearn.naive_bayes import GaussianNB
+from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE
+from sklearn.linear_model import Lasso
+from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import LinearSVR, SVR
 
+
+from skfeature.function.similarity_based import reliefF
 
 def seq_to_int(seq):
     num = 0
@@ -183,24 +192,40 @@ def make_features(data):
 
 def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
     # TODO: build a list of feature selectors from scikit learn
-    feature_selectors = []
+    feature_selectors = [RFE(SVR(kernel="linear"), n_features_to_select=20),
+                         SelectFromModel(LinearSVR(C=0.01), threshold=-np.inf, max_features=20)]
+
+
+    selector1 = feature_selectors[0]
+    selector1.fit(train_x, train_y)
+    print selector1.get_support(indices=True)
+    exit()
+
+
+
+
+
     # TODO: for each feature selector, define a list of hyperparams e.x alphas = [0,0.000001,0.00001,...]
-    hyperparams = [
+    """hyperparams = [
         [hyperparams for selector 1]
         [hyperparams for selector 2]
         [hyperparams for selector 3]
         ...
-    ]
+    ]"""
     results = []
     # TODO: define a list of regressors from sci-kit learn
     regressors = []
+
+    gnb = GaussianNB()
+    y_pred = gnb.fit(new_data, Y).predict(new_data)
 
     for selector, hyperparameters in zip(feature_selectors, hyperparams): # iterates across both at same time
         MSE_alphas = []
         for a in hyperparameters:
 
-            model = selector(alpha=a, maxiterations= large number)
-            params = model.coef_
+            model = selector(alpha=a).fit(train_x)
+
+            params = model.get_support()
             features = [i for i, x in enumerate(params) if x != 0]
 
             selected_train_x = train_x[:, features]
@@ -239,6 +264,7 @@ def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
 
 
     # TODO: write text file describing featureselector and alpha and error achieved by this model
+
 
 
 
