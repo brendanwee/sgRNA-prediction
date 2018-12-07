@@ -68,6 +68,16 @@ def import_formatted_data(filename):
     return data
 
 
+def import_feature_data(filename):
+    data = []
+    with open(filename, "r") as f:
+        for line in f:
+            row = line.strip().split("\t")
+            row = [float(x) for x in row]
+            data.append(row)
+    return data
+
+
 def write_data(data, filename):
     with open(filename, "w") as f:
         for row in data:

@@ -236,7 +236,7 @@ def select_features_and_model(train_x, train_y, val_x, val_y, dataset_name):
     with open(dataset_name+"_features.txt", "w") as f:
         feats = [str(x) for x in features]
         f.write("\t".join(feats))
-    
+
 
     # TODO: write text file describing featureselector and alpha and error achieved by this model
 
